@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const GatewaySchema = new mongoose.Schema({
     serial_number: {
         type: "String",
@@ -19,11 +20,19 @@ const GatewaySchema = new mongoose.Schema({
         },
         required: true
     },
-    peripherals : [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'Peripheral',
-        limit: 2
-    }]
+    peripherals : {
+       type:[{
+           type: mongoose.Schema.Types.Object,
+           ref:'Peripheral',
+       }],
+        validate: {
+            validator: function(v) {
+                console.log(v.length)
+                return v.length <= 10;
+            },
+            message: props => `${props.value} is only 2`
+        }
+    },
 })
 
 module.exports = mongoose.model("Gateway", GatewaySchema)

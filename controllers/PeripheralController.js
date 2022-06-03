@@ -3,7 +3,8 @@ const Gateway=require('../models/Gateway');
 
 module.exports = {
     create,
-    getAll
+    getAll,
+    deletePeripheral
 };
 
 async function create(req, res) {
@@ -16,10 +17,18 @@ async function create(req, res) {
         gateway
     });
 
+    let new_peripheral;
     try {
-        const new_peripheral = await peripheral.save();
-
         const gatewayById = await Gateway.findById(gateway);
+
+        if(gatewayById.peripherals.length < 10) {
+            new_peripheral = await peripheral.save();
+        }
+        else {
+            return res.status(500).json({
+                details: "Gateways only admits 10 peripherals!",
+            });
+        }
         gatewayById.peripherals.push(new_peripheral);
         await gatewayById.save();
 
@@ -47,3 +56,27 @@ async function getAll(req, res) {
         });
     }
 }
+
+async function deletePeripheral(req, res) {
+    try {
+      const { id } = req.params;
+
+      const result = await Peripheral.findOneAndDelete({ _id: id });
+
+      const gateway = await Gateway.findOneAndUpdate(
+        { _id: result.gateway },
+        { $pull: { peripherals: { _id: result._id } } },
+        { safe: true, multi: false }
+      );
+
+      res.status(200).json({
+        data: result,
+        message: "Peripheral was succefully deleted!",
+      });
+    } catch (error) {
+      res.status(500).json({
+        details: error.message,
+      });
+    }
+  }
+  

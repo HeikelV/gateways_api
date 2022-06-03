@@ -17,5 +17,6 @@ router.delete('/gateways/:id',GatewaysController.deleteGateway);
 //Peripheral routes
 router.post('/peripherals',PeripheralsController.create);
 router.get('/peripherals',PeripheralsController.getAll);
+router.delete('/peripherals/:id',PeripheralsController.deletePeripheral);
 
 module.exports=router

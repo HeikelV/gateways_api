@@ -43,7 +43,7 @@ async function create(req, res) {
     }
 }
 
-async function getAll(req, res) {
+async function getAll(_req, res) {
     try {
         const peripherals = await Peripheral.find({}).populate("gateway");
         res.status(200).json({
@@ -63,7 +63,7 @@ async function deletePeripheral(req, res) {
 
       const result = await Peripheral.findOneAndDelete({ _id: id });
 
-      const gateway = await Gateway.findOneAndUpdate(
+      await Gateway.findOneAndUpdate(
         { _id: result.gateway },
         { $pull: { peripherals: { _id: result._id } } },
         { safe: true, multi: false }

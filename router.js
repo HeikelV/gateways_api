@@ -3,7 +3,7 @@ const router =  express.Router();
 const GatewaysController=require("./controllers/GatewaysController")
 const PeripheralsController=require("./controllers/PeripheralController")
 
-router.get('/',(req,res)=>{
+router.get('/',(_req,res)=>{
     res.send("ok")
 })
 //Gateways routes

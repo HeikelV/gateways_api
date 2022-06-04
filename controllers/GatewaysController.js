@@ -29,7 +29,7 @@ async function create(req, res) {
   }
 }
 
-async function getAll(req, res) {
+async function getAll(_req, res) {
   try {
     const gateways = await Gateway.find();
     res.status(200).json({

@@ -8,7 +8,7 @@ const Gateway = require("../models/Gateway");
 beforeEach((done) => {
   mongoose.connect(
     process.env.DATABASE_DEV_URL,
-    { useNewUrlParser: true },
+    { useNewUrlParser: true, useUnifiedTopology: true },
     () => done()
   );
 });

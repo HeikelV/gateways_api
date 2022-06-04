@@ -27,7 +27,6 @@ const GatewaySchema = new mongoose.Schema({
        }],
         validate: {
             validator: function(v) {
-                console.log(v.length)
                 return v.length <= 10;
             },
             message: props => `${props.value} is only 2`

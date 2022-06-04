@@ -1,25 +1,19 @@
 require("dotenv").config();
-var cors = require('cors');
-
-const express = require("express");
 const mongoose = require("mongoose");
 
-const app = express();
+const createServer = require("./server");
 
-app.use(cors());
-app.use(express.json());
 
-mongoose.connect(process.env.DATABASE_URL, {
-    "useNewUrlParser": true,
-    "useUnifiedTopology": true
-}).then(() => {
-    console.log("MongoDB Connected!!")
-})
-
-const router = require('./router')
-app.use('/', router);
-
-const port = process.env.PORT || 5000
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-})
+mongoose
+  .connect(process.env.DATABASE_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("MongoDB Connected!!");
+    const port = process.env.PORT || 5000;
+    const app = createServer();
+    app.listen(port, () => {
+      console.log(`Listening on port ${port}`);
+    });
+  });

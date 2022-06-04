@@ -19,7 +19,6 @@ mongoose.connect(process.env.DATABASE_URL, {
 const router = require('./router')
 app.use('/', router);
 
-const port = 5000
-app.listen(port, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log(`Listening on port ${port}`);
 })

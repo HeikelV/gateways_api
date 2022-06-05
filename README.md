@@ -14,7 +14,7 @@
 - Example : ```DATABASE_DEV_URL=mongodb://localhost:27017/musala```
 
 
-2. Open yhe terminal in the project root directory and run:
+2. Open the terminal in the project root directory and run:
   
     ``` 
     $ npm install

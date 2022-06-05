@@ -1,4 +1,6 @@
-# simple-test-crud
+# Gateways API
+
+**A sample project for gateways management** 
 
 ## Requirements
 1. NodeJS 14.7 or above

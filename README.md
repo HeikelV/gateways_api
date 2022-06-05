@@ -29,6 +29,6 @@ For code testing (with Jest and Supertest, in this case),
  - Configure the ```DATABASE__DEV_URL``` with your Mongo DB connection's link
  - Example : ```DATABASE_DEV_URL=mongodb://localhost:27017/musala_test```
 
-2. Open yhe terminal in the project root directory and run:
+2. Open the terminal in the project root directory and run:
    ```npm run test```
 

@@ -59,7 +59,7 @@ async function get(req, res) {
 async function getPeripherals(req, res) {
   try {
     const { id } = req.params;
-    const gateway = await Gateway.findById(id).populate("peripherals");
+    const gateway = await Gateway.findById(id);
     res.status(200).json({
       data: gateway.peripherals,
     });
